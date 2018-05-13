@@ -5,18 +5,21 @@ namespace Movement {
     class PlayingState : GameObjectList{
         protected PhysicsObject ball;
         protected SpaceShip spaceship;
+        protected Shield shield;
         public PlayingState() {
             //Step 1.1: Create a PhysicsObject, place it in the middle of the screen and add it to the PlayingState.
             //Use one of the ball sprites  and scale = 30
-            ball = new PhysicsObject("GreenBallX", new Vector2(0, 0), new Vector2(0,0), 30, new Vector2(0, 0));
+            ball = new PhysicsObject("GreenBallX", new Vector2(Movement.Screen.X / 2, Movement.Screen.Y / 2), new Vector2(0,0), 30, new Vector2(0, 0));
             this.Add(ball);
-            spaceship = new SpaceShip("spr_spaceship", new Vector2(Movement.Screen.X/2,Movement.Screen.Y/2));
-            this.Add(spaceship);
+            
             //Step 2.1: Create a SpaceShip, place it in the middle of the screen and add it to the PlayingState.
             //Use the spaceship sprite.
-
+            spaceship = new SpaceShip("spr_spaceship", new Vector2(Movement.Screen.X/2,Movement.Screen.Y/2));
+            this.Add(spaceship);
             //Step 4.1: Create a Shield without starting velocity, place it in the middle of the screen and add it to the PlayingState.
             //Use one of the ball sprites. 
+            shield = new Shield("spr_ball_green", spaceship, new Vector2(0,0));
+            this.Add(shield);
         }
 
         public override void HandleInput(InputHelper inputHelper) {
@@ -30,6 +33,7 @@ namespace Movement {
         public override void Update(GameTime gameTime)
         {
             spaceship.LookAt(ball, 90);
+            shield.target = spaceship.Position;
             base.Update(gameTime);
         }
     }
