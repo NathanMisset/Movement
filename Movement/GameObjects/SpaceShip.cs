@@ -27,13 +27,6 @@ namespace Movement {
         public override void Update(GameTime gameTime) {
             //Step 2.6: Move the ship to the position of the target.
             velocity = target - position;
-            //Step 2.7: Comment step 2.6. Adapt the velocity to make the ship move to the target, include Easing.
-            //Step 2.8: To speed up the ship, make it move three times as fast as before.
-
-            //Step 2.9: Detect that the target position is reached and stop moving.
-
-            //Step 3.0: Compute the rotation of the ship.
-
             base.Update(gameTime);
         }
     }
