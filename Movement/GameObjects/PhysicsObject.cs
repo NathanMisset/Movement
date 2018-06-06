@@ -5,8 +5,10 @@ namespace Movement {
     class PhysicsObject : RotatingSpriteGameObject{
         private readonly float radius;
         protected Vector2 acceleration;
+        protected Vector2 force;
+        protected float mass;
 
-        public PhysicsObject(string assetName, Vector2 position, Vector2 velocity, float radius, Vector2 acceleration)
+        public PhysicsObject(string assetName, Vector2 position, Vector2 velocity, float radius, Vector2 acceleration, Vector2 force, float mass)
             : base(assetName) {
             PerPixelCollisionDetection = false;
             Position = position;
@@ -15,6 +17,8 @@ namespace Movement {
             this.radius = radius;
             scale = radius * 2 / Width;
             Acceleration = acceleration;
+            this.force = force;
+            this.mass = mass;
         }
 
         public override void Update(GameTime gameTime) {
@@ -34,8 +38,9 @@ namespace Movement {
                 position.Y = GameEnvironment.Screen.Y - radius;
                 velocity.Y *= -1f;
             }
-
+            acceleration = force / mass;
             Velocity += Acceleration;
+            force = Vector2.Zero;
             base.Update(gameTime);
         }
 
