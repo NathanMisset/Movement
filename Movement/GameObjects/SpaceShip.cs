@@ -39,16 +39,15 @@ namespace Movement {
                 //Step 2.8: To speed up the ship, make it move three times as fast as before.
                 //Step 3.0: Compute the rotation of the ship.
                 velocity = trajectory * easeFactor;
-                direction = (float)Math.Atan2(velocity.Y, velocity.X);
-                velocity.X = (float)Math.Cos(direction) * speed;
-                velocity.Y = (float)Math.Sin(direction) * speed;
             }
             //Step 2.9: Detect that the target position is reached and stop moving.
             else
             {
                 velocity = Vector2.Zero;
             }
-
+            direction = (float)Math.Atan2(velocity.Y, velocity.X);
+            velocity.X = (float)Math.Cos(direction) * speed;
+            velocity.Y = (float)Math.Sin(direction) * speed;
             base.Update(gameTime);
         }
     }
